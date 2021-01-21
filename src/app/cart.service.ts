@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Product } from './product';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Shipping } from './shipping';
+
+import { APP_BASE_HREF } from '@angular/common'; 
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,8 @@ export class CartService {
   items: Product[] = [];
 
   constructor(
-    private http: HttpClient
+    @Inject(APP_BASE_HREF) private baseHref: string,
+    private http: HttpClient,
   ) { }
 
   addToCart(product: Product): void {
@@ -30,6 +33,6 @@ export class CartService {
   }
 
   getShippingPrices(): Observable<Shipping> {
-    return this.http.get<Shipping>('/assets/shipping.json');
+    return this.http.get<Shipping>(this.baseHref + '/assets/shipping.json');
   }
 }

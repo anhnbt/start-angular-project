@@ -13,6 +13,8 @@ import { CartComponent } from './cart/cart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ShippingComponent } from './shipping/shipping.component';
 
+import {APP_BASE_HREF} from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,7 @@ import { ShippingComponent } from './shipping/shipping.component';
       }
     ])
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue: '/start-angular-project'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
